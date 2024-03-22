@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Hugo 0.66.0" />
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 引入Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+  <!-- 引入jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- 引入Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/custom.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="alternate" href="index.xml" type="application/rss+xml" title="Speech Research">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  <style>Q
+    body {
+      font-size: 20px; /* 设置默认字体大小 */
+
+    }
+    thead{
+      border-top: 1px solid #ccc; 
+    }
+    .table td{
+      border: none
+    }
+    .table-container {
+      overflow-x: auto;
+      /* width:120%; */
+      margin: 0 auto;
+    }
+    /* table {
+      overflow-x: auto;
+    } */
+
+    .audio-container {
+      display: flex;
+      justify-content:left;
+      align-items: left;
+      border: none
+    }
+    /* .video-container {
+      position: relative;
+      width: 600px;
+      margin: 0 auto;
+      padding-bottom: 56.25%; /* 16:9宽高比，调整此值适配其他比例的视频 */
+      /* overflow: hidden;
+    }
+
+    /* 视频元素的样式 */
+    /* .video-container video {
+      /* position: absolute; */
+      /* top: 0;
+      left: 0;
+      width: 600px; */
+      /* height: 100%; */
+
+    video {
+      
+      width: 200px; /* 设置视频宽度 */
+      height: 90%; /* 设置视频高度 */
+    }
+    @media(min-width:1200px){
+      .table-container {
+      overflow-x: auto;
+      width:100%;
+      margin: 0 auto;
+
+    }
+    }
+    @media (max-width: 600px) {
+      /* 在手机屏幕上应用以下样式 */
+      body {
+        font-size: 14px; /* 缩小字体大小 */
+      }
+      h1 {
+        font-size: 22px; /* 缩小标题字体大小 */
+      }
+      h2 {
+        font-size: 18px; /* 缩小标题字体大小 */
+      }
+      nav ul li {
+        display: block; /* 列表项显示为块级元素，方便手机点击 */
+      }
+      .video-container {
+        padding-bottom: 75%; /* 4:3宽高比，调整此值适配其他比例的视频 */
+      }
+      video {
+      width: 220px; /* 设置视频宽度 */
+      height: 180px; /* 设置视频高度 */
+      }
+    }
+  </style>
+</head>
+
+<body rightmargin="150" leftmargin="150" topmargin="100" bottommargin="100" line-height:160%>
+  <!-- <font size="5"> -->
+
+    <div class="container">
+
+      <header role="banner">
+
+      </header>
+      <main role="main">
+        <article itemscope itemtype="https://schema.org/BlogPosting">
+          <br></br>
+          <h1 itemprop="headline" align="center">
+            <font color="000093">Harmonizing Pixels and Melodies: Maestro-Guided Film Soundtrack Generation Based on ControlNet
+            </font>
+          </h1>
+          <br></br>
+          <p style="line-height:1" align="center"><b>
+              <font color="061E61"><a>Fan Qi</a><sup>	&#x1F4EE;,1</sup>, <a>Lifeng Ni</a><sup>&#x1F4EE;,2</sup>, <a>Changsheng Xu</a><sup>3</sup></font>
+            </b></p>
+          <p style="line-height:0.6" align="center">
+            <font color="061E61"><sup>1</sup>TIANJIN UNIVERSITY OF TECHNOLOGY, China</font>
+          </p>
+          <!-- <p style="line-height:0.6" align="center">
+            <font color="061E61"> <sup>2</sup>Speech, Audio & Music Intelligence (SAMI), ByteDance</font>
+          </p> -->
+          <section itemprop="entry-text">
+            <br>
+            <div class="container">
+              <center>
+                <p><a>[Paper on ArXiv]</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>[Code on GitHub]</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              </center>
+            </div>
+
+  
+            <h2 id="abstract">
+              <font color="000093">Abstract</font>
+            </h2>
+            <p style="text-align: justify;">
+              <font color="061E61"> 
+                We introduce a pioneering film score generation framework to harmonize visual pixels and music melodies utilizing the principles of a latent diffusion model. Our framework processes film clips as input and excels at generating music that aligns with a general theme, while also offering the capability to tailor outputs to a specific composition style. Contrary to approaches that convert video to text and then text to music, our model directly produces music from video, utilizing a streamlined and efficient tuning mechanism on ControlNet. It also integrates a film encoder which is adept at understanding the film's semantic depth, emotional impact, and aesthetic appeal. Additionally, we introduce an innovative metric aimed at evaluating the originality and recognizability of music within film scores. To fill this gap for film scores, we curate a comprehensive dataset of film videos and legendary original scores, injecting domain-specific knowledge into our data-driven generation model. Our model outperforms existing methodologies in creating film scores, capable of generating music that reflects the guidance of a maestro's style, thereby redefining the benchmark for automated film scores and laying a robust groundwork for future research in this domain.
+              </font>
+            </p>
+
+            <br></br>
+            <figure>
+              <p align="center"><img src="Framework.png" width="80%" class="center" /></p>
+              <figcaption>
+                <p style="text-align: justify;">
+                  <font color="061E61"><b>Figure 1:</b> Illustration of our HPM framework. a). During the training stage, our model incorporates the video feature as a global control input, alongside the local control signal of melody and dynamic. b). During the inference stage, the local controls can be one composition style of one specific master, guiding the Film Score ControlNet to produce a Mel-spectrogram, subsequently converted into audio via a vocoder.  c). The film encoder processes to extract emotional, semantic, and aesthetic embeddings, enriching the model's interpretative depth.
+                </p>
+              </figcaption>
+            </figure>
+
+            <br></br>
+
+            <p><b>
+              <font color="061E61">Film score generation:</font>
+            </b></p>
+            <div class = "table-container">
+            <table class="table" align="center" style="table-layout: fixed;word-break:break-word">
+              <thead>
+                <tr>
+                  <th scope="col" width="150px">
+                    <font color="061E61">Input Video</font>
+                  </th>
+                  <th scope="col" width="200px">
+                    <font color="061E61">Ground-Truth Score</font>
+                  </th>
+                  <th scope="col" width="200px">
+                    <font color="061E61">Output Score</font>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td><video controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_102_clip_1010s_001.mp4" type="video/mp4">
+                      Your browser does not support HTML video.
+                      </video></td>
+                    <td><audio controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_102_clip_1010s_001.wav" type="audio/wav">
+                      Your browser does not support HTML video.
+                      </audio></td>
+                    <td><audio controls = controls>
+                        <source src="D:\zhanshi\Film Score\film score generation\generated_movie_102_clip_1010s_001.wav" type="audio/wav">
+                        Your browser does not support HTML video.
+                        </audio></td>
+                </tr>
+                <tr>
+                  <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_125_clip_610s_000.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_125_clip_610s_000.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                  <td><audio controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\generated_movie_125_clip_610s_000.wav" type="audio/wav">
+                      Your browser does not support HTML video.
+                      </audio></td>
+                </tr>
+                <tr>
+                <td><video controls = controls>
+                  <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_127_clip_2210s_010.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+                <td><audio controls = controls>
+                  <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_127_clip_2210s_010.wav" type="audio/wav">
+                  Your browser does not support HTML video.
+                  </audio></td>
+                <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\generated_movie_127_clip_2210s_010.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                </tr>
+                <tr>
+                  <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_137_clip_1410s_005.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                  </video></td>
+                  <td><audio controls = controls>
+                  <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_137_clip_1410s_005.wav" type="audio/wav">
+                  Your browser does not support HTML video.
+                  </audio></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\generated_movie_137_clip_1410s_005.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                </tr>
+                <tr>
+                <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_149_clip_410s_018.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+                    <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_149_clip_410s_018.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                    <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\generated_movie_149_clip_410s_018.wav" type="audio/wav">
+                      Your browser does not support HTML video.
+                      </audio></td>
+                </tr>
+                <tr>
+                  <td><video controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_152_clip_910s_006.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                      </video></td>
+                  <td><audio controls = controls>
+                  <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_152_clip_910s_006.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                  </audio></td>
+                  <td><audio controls = controls>
+                        <source src="D:\zhanshi\Film Score\film score generation\generated_movie_152_clip_910s_006.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                        </audio></td>
+                </tr>  
+                <tr>
+                  <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_158_clip_410s_000.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_158_clip_410s_000.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\generated_movie_158_clip_410s_000.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                </tr>
+                <tr>
+                  <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_180_clip_1710s_009.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_180_clip_1710s_009.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                  <td><audio controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\generated_movie_180_clip_1710s_009.wavv" type="audio/wav">
+                      Your browser does not support HTML video.
+                      </audio></td>
+                </tr>              
+                <tr>
+                  <td><video controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\wusheng_movie_200_clip_2010s_004.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+                  <td><audio controls = controls>
+                    <source src="D:\zhanshi\Film Score\film score generation\ground_truth_movie_200_clip_2010s_004.wav" type="audio/wav">
+                    Your browser does not support HTML video.
+                    </audio></td>
+                  <td><audio controls = controls>
+                      <source src="D:\zhanshi\Film Score\film score generation\generated_movie_200_clip_2010s_004.wav" type="audio/wav">
+                      Your browser does not support HTML video.
+                      </audio></td>
+                </tr>              
+
+
+            
+
+        <div class = "table-container">
+        <table class="table" align="center" style="table-layout: fixed;word-break:break-word">
+          <thead>
+            <tr>
+              <th scope="col" width="300px">
+                <font color="061E61">Input Video</font>
+              </th>
+              <th scope="col" width="300px">
+                <font color="061E61">Input Style</font>
+              </th>
+              <th scope="col" width="300px">
+                <font color="061E61">Output Score</font>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <td><video controls = controls>
+                  <source src="style_transfer_test/风格-蝙蝠侠/wusheng.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+                <td><video controls = controls>
+                  <source src="style_transfer_test/风格-蝙蝠侠/movie_154_clip_210s_001.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+                <td><video controls = controls>
+                    <source src="style_transfer_test/风格-蝙蝠侠/new_style_video.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                    </video></td>
+            </tr>
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-大话西游\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-大话西游\movie_168_clip_410s_000.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-大话西游\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-碟中谍\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-碟中谍\movie_137_clip_1410s_005.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-碟中谍\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-复仇者联盟\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-复仇者联盟\movie_182_clip_1510s_003.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-复仇者联盟\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-海上钢琴师\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-海上钢琴师\movie_179_clip_610s_004.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-海上钢琴师\movie_179_clip_610s_004.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-环太平洋\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-环太平洋\movie_174_clip_1310s_005.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-环太平洋\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-荒野大镖客\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-荒野大镖客\movie_139_clip_1610s_031.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-荒野大镖客\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-菊次郎的夏天\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-菊次郎的夏天\movie_10_clip_1010s_004.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-菊次郎的夏天\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-情癫大圣\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-情癫大圣\movie_117_clip_1510s_010.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-情癫大圣\wusheng.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-杀死比尔\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-杀死比尔\movie_135_clip_2510s_002.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-杀死比尔\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-唐伯虎点秋香\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-唐伯虎点秋香\movie_186_clip_910s_003.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-唐伯虎点秋香\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-银河护卫队\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格-银河护卫队\movie_165_clip_1510s_009.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格-银河护卫队\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>            
+            <tr>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格—圣诞快乐劳伦斯先生\wusheng.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                <source src="style_transfer_test\风格—圣诞快乐劳伦斯先生\movie_149_clip_410s_016.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+                </video></td>
+              <td><video controls = controls>
+                  <source src="style_transfer_test\风格—圣诞快乐劳伦斯先生\new_style_video.mp4" type="video/mp4">
+                  Your browser does not support HTML video.
+                  </video></td>
+            </tr>          
+            <p><b>
+              <font color="061E61">Film score style Transfer:</font>
+            </b></p>
+              
+        </article>
+      </main>
+
+    </div>
+
+    <script>
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+      ga('create', 'UA-139981676-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+         HTML: ["input/TeX","output/HTML-CSS"],
+         TeX: {
+                Macros: {
+                         bm: ["\\boldsymbol{#1}", 1],
+                         argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+                         argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+                extensions: ["AMSmath.js","AMSsymbols.js"],
+                equationNumbers: { autoNumber: "AMS" } },
+         extensions: ["tex2jax.js"],
+         jax: ["input/TeX","output/HTML-CSS"],
+         tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true },
+         "HTML-CSS": { availableFonts: ["TeX"],
+                       linebreaks: { automatic: true } }
+     });
+ </script>
+
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+       }
+     });
+ </script>
+
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+      </script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
